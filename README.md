@@ -7,16 +7,57 @@
 | open-slide | 現場講、要動畫和講者模式 | `slides/<id>/index.tsx`，用 deck-studio kit |
 | .pptx | 要交給別人改、要放進對方的簡報 | ppt-master：SVG → PowerPoint 原生形狀（可編輯，不是圖片） |
 
-## 第一次設定
+## 在新電腦第一次設定
+
+需要先裝好：
+
+| 工具 | 用途 | 備註 |
+|---|---|---|
+| Git、GitHub CLI（`gh`） | clone 這個 private repo | `gh auth login` 登入有權限的帳號 |
+| Node.js 22 以上、pnpm | open-slide、deck-studio 的腳本 | pnpm：`npm i -g pnpm` |
+| Python 3.12 | ppt-master | Windows 用 `py -3.12` 確認有裝 |
+| PowerPoint（Windows） | `pptx.mjs render` 輸出每頁截圖 | 只做 pptx 不截圖可以不裝 |
+| Microsoft JhengHei 字型 | pptx 範本的中文字型 | Windows 內建；macOS 開 pptx 會被換成別的字型，版面可能跑掉 |
+
+步驟（Windows 用 Git Bash；macOS/Linux 把 `.venv/Scripts/python` 換成 `.venv/bin/python`）：
 
 ```bash
-git submodule update --init          # ppt-master（鎖在 82468e8）
-pnpm install                         # open-slide
-py -3.12 -m venv .venv               # ppt-master 的 Python 環境
+# 1. clone：要帶 --recurse-submodules，ppt-master 才會一起下來
+#    放短路徑：ppt-master 轉檔的暫存資料夾很深，Windows 路徑超過 260 字元會失敗
+cd ~/projects
+gh repo clone shaun0457/deck-factory -- --recurse-submodules
+cd deck-factory
+# 已經 clone 但忘了帶參數（pptx/vendor/ppt-master 是空的）：
+#   git submodule update --init
+
+# 2. open-slide
+pnpm install
+
+# 3. ppt-master 的 Python 環境（.venv 不進版控，每台電腦各建一次）
+py -3.12 -m venv .venv                     # macOS/Linux：python3.12 -m venv .venv
 .venv/Scripts/python -m pip install -r pptx/vendor/ppt-master/requirements.txt
+
+# 4. 確認裝好了
+S=.claude/skills/deck-studio/scripts
+pnpm build                                              # open-slide 能 build
+node $S/pptx.mjs new setup-check --template tech-talk   # 用範本建一個測試專案
+node $S/pptx.mjs build pptx/projects/setup-check_*      # 最後一行印出 pptx: <路徑>
+node $S/pptx.mjs render <上一步的 pptx 路徑> --out setup-check-shots   # 只在有 PowerPoint 的 Windows
+rm -rf pptx/projects/setup-check_* setup-check-shots    # 刪掉測試專案和截圖
 ```
 
-repo 要放在短路徑（例如 `C:\Users\<you>\projects\deck-factory`）：ppt-master 轉檔時的暫存資料夾很深，Windows 路徑超過 260 字元會失敗。
+4 的 build 要看到 6 頁 `[OK]` 和 `POSTFLIGHT status=passed`；render 要在輸出資料夾看到 `slide01.png`～`slide06.png`，和 `pptx/templates/tech-talk/baseline/` 長得一樣。
+
+之後要做簡報時，在這個 repo 的根目錄開 Claude Code，deck-studio skill 才會載入。
+
+### 之後同步
+
+```bash
+git pull --recurse-submodules        # 連 ppt-master 的版本一起更新
+pnpm install                         # package.json 有變時
+```
+
+ppt-master 的版本有升級時（`pptx/vendor/ppt-master` 改了），重跑 3 的 pip install。
 
 ## 常用指令
 
