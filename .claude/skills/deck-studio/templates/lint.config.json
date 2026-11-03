@@ -1,0 +1,4 @@
+{
+  "banned": ["毫秒級", "絕不", "完全安全", "TODO"],
+  "targetSeconds": 420
+}

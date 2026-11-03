@@ -1,0 +1,3 @@
+[submodule "pptx/vendor/ppt-master"]
+	path = pptx/vendor/ppt-master
+	url = https://github.com/hugohe3/ppt-master.git

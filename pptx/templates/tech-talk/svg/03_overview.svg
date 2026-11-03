@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-Hant" data-pptx-page-role="content" font-family="Microsoft JhengHei">
+  <defs>
+    <marker id="arrowHead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <polygon points="0,0 10,5 0,10" fill="#5F5E5B" />
+    </marker>
+  </defs>
+  <rect id="overview-bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#FFFEFC" />
+  <g id="overview-title" data-pptx-bounds="72 32 1136 100" font-weight="bold">
+    <text x="72" y="70" font-size="18" fill="#E8553B">系統全貌</text>
+    <text x="72" y="110" font-size="40" fill="#191919">五個方塊，請求只往一個方向走</text>
+  </g>
+  <g id="overview-map" data-pptx-bounds="72 150 1136 440">
+    <g id="map-links" stroke="#5F5E5B" stroke-width="3" fill="none">
+      <line x1="232" y1="345" x2="312" y2="345" marker-end="url(#arrowHead)" />
+      <line x1="512" y1="320" x2="592" y2="320" marker-end="url(#arrowHead)" />
+      <line x1="412" y1="380" x2="412" y2="452" marker-end="url(#arrowHead)" />
+      <line x1="692" y1="380" x2="692" y2="452" marker-end="url(#arrowHead)" />
+      <line x1="792" y1="300" x2="892" y2="246" marker-end="url(#arrowHead)" />
+      <line x1="792" y1="340" x2="892" y2="404" stroke-dasharray="8,4" marker-end="url(#arrowHead)" />
+    </g>
+    <g id="node-user">
+      <rect x="82" y="290" width="150" height="110" rx="16" fill="#F1EFEA" />
+      <text x="157" y="340" font-size="24" font-weight="bold" fill="#191919" text-anchor="middle">使用者</text>
+      <text x="157" y="372" font-size="18" fill="#5F5E5B" text-anchor="middle">網頁 / App</text>
+    </g>
+    <g id="node-accept">
+      <rect x="312" y="260" width="200" height="120" rx="16" fill="#E7F3F8" />
+      <text x="412" y="312" font-size="24" font-weight="bold" fill="#191919" text-anchor="middle">受理 API</text>
+      <text x="412" y="346" font-size="18" fill="#5F5E5B" text-anchor="middle">短交易，馬上回應</text>
+    </g>
+    <g id="node-build">
+      <rect x="592" y="260" width="200" height="120" rx="16" fill="#EDF3EC" />
+      <text x="692" y="312" font-size="24" font-weight="bold" fill="#191919" text-anchor="middle">背景產生</text>
+      <text x="692" y="346" font-size="18" fill="#5F5E5B" text-anchor="middle">不持有任何鎖</text>
+    </g>
+    <g id="node-db">
+      <rect x="312" y="456" width="480" height="104" rx="16" fill="#FBF3DB" />
+      <text x="552" y="502" font-size="24" font-weight="bold" fill="#191919" text-anchor="middle">PostgreSQL</text>
+      <text x="552" y="534" font-size="18" fill="#5F5E5B" text-anchor="middle">工作、狀態、規則都在這裡</text>
+    </g>
+    <g id="node-cloud">
+      <rect x="896" y="180" width="270" height="110" rx="16" fill="#FAF1F5" />
+      <text x="1031" y="228" font-size="24" font-weight="bold" fill="#191919" text-anchor="middle">物件儲存</text>
+      <text x="1031" y="260" font-size="18" fill="#5F5E5B" text-anchor="middle">雲端 · 需要憑證</text>
+    </g>
+    <g id="node-disk">
+      <rect x="896" y="350" width="270" height="110" rx="16" fill="#FFFFFF" stroke="#9B9A97" stroke-width="2" stroke-dasharray="8,4" />
+      <text x="1031" y="398" font-size="24" font-weight="bold" fill="#191919" text-anchor="middle">本機磁碟</text>
+      <text x="1031" y="430" font-size="18" fill="#5F5E5B" text-anchor="middle">地端 · 選用</text>
+    </g>
+  </g>
+  <g id="overview-takeaway" data-pptx-bounds="72 604 1136 80">
+    <text x="72" y="652" font-size="24" fill="#191919">接下來放大兩個地方：<tspan font-weight="bold" fill="#E8553B">工作放在哪裡</tspan>、<tspan font-weight="bold" fill="#E8553B">規則放在哪裡</tspan>。虛線＝選用。</text>
+  </g>
+</svg>

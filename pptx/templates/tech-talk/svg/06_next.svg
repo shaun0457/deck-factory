@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-Hant" data-pptx-page-role="ending" font-family="Microsoft JhengHei">
+  <rect id="next-bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#FFFEFC"/>
+  <g id="next-title" data-pptx-bounds="72 32 1136 100" font-weight="bold">
+    <text x="72" y="70" font-size="18" fill="#E8553B">限制與下一步</text>
+    <text x="72" y="110" font-size="40" fill="#191919">單台已能交付；要擴展，路已經畫好</text>
+  </g>
+  <g id="next-limits" data-pptx-bounds="72 150 360 280">
+    <rect x="72" y="160" width="360" height="260" rx="16" fill="#F1EFEA"/>
+    <text x="104" y="204" font-size="18" font-weight="bold" fill="#9B9A97">已知限制</text>
+    <text x="104" y="254" font-size="24" fill="#191919">只能單台<tspan x="104" dy="40">沒有 failover</tspan><tspan x="104" dy="40">當機要等逾時才回收</tspan></text>
+  </g>
+  <g id="next-unverified" data-pptx-bounds="460 150 360 280">
+    <rect x="460" y="160" width="360" height="260" rx="16" fill="#FFFEFC" stroke="#9B9A97" stroke-width="2" stroke-dasharray="8,4"/>
+    <text x="492" y="204" font-size="18" font-weight="bold" fill="#9B9A97">還沒驗證</text>
+    <text x="492" y="254" font-size="24" fill="#191919">公開部署<tspan x="492" dy="40">大量同時請求的延遲</tspan><tspan x="492" dy="40">地端離線安裝</tspan></text>
+  </g>
+  <g id="next-steps" data-pptx-bounds="848 150 360 280">
+    <rect x="848" y="160" width="360" height="260" rx="16" fill="#E7F3F8"/>
+    <text x="880" y="204" font-size="18" font-weight="bold" fill="#4F8FCB">下一步</text>
+    <text x="880" y="254" font-size="24" fill="#191919">jobs table＋SKIP LOCKED<tspan x="880" dy="40">第二台 worker</tspan><tspan x="880" dy="40">離線打包</tspan></text>
+  </g>
+  <g id="next-close" data-pptx-bounds="72 470 1136 160">
+    <rect x="72" y="480" width="1136" height="140" rx="16" fill="#191919"/>
+    <text x="112" y="540" font-size="32" font-weight="bold" fill="#FFFFFF">規則放對地方，擴展只是多一台 worker。</text>
+    <text x="112" y="586" font-size="24" fill="#CBD2D9">以上，歡迎從任何一頁開始問。</text>
+  </g>
+</svg>

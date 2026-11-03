@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-Hant" data-pptx-page-role="content" font-family="Microsoft JhengHei">
+  <rect id="rules-bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#FFFEFC" />
+  <g id="rules-title" data-pptx-bounds="72 32 1136 100" font-weight="bold">
+    <text x="72" y="70" font-size="18" fill="#E8553B">取捨二 · 規則放在哪裡</text>
+    <text x="72" y="110" font-size="40" fill="#191919">規則交給 PostgreSQL，當機也擋得住</text>
+  </g>
+  <g id="rule-1" data-pptx-bounds="72 150 1136 130">
+    <rect x="72" y="156" width="1136" height="118" rx="16" fill="#FBF3DB" />
+    <circle cx="124" cy="215" r="24" fill="#191919" />
+    <text x="124" y="224" font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="172" y="204" font-size="28" font-weight="bold" fill="#191919">同一份報表同時只能有一個工作在產生</text>
+    <text x="172" y="246" font-size="18" fill="#5F5E5B" font-family="Consolas, Microsoft JhengHei">partial unique index · 測試：兩個請求同時送，只有一個成功</text>
+  </g>
+  <g id="rule-2" data-pptx-bounds="72 290 1136 130">
+    <rect x="72" y="296" width="1136" height="118" rx="16" fill="#FBF3DB" />
+    <circle cx="124" cy="355" r="24" fill="#191919" />
+    <text x="124" y="364" font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="172" y="344" font-size="28" font-weight="bold" fill="#191919">收單是短交易，產生時不持有鎖</text>
+    <text x="172" y="386" font-size="18" fill="#5F5E5B" font-family="Consolas, Microsoft JhengHei">SELECT … FOR UPDATE · commit 之後才開始產生</text>
+  </g>
+  <g id="rule-3" data-pptx-bounds="72 430 1136 130">
+    <rect x="72" y="436" width="1136" height="118" rx="16" fill="#FBF3DB" />
+    <circle cx="124" cy="495" r="24" fill="#191919" />
+    <text x="124" y="504" font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle">3</text>
+    <text x="172" y="484" font-size="28" font-weight="bold" fill="#191919">逾時被回收的舊工作，結果寫不回來</text>
+    <text x="172" y="526" font-size="18" fill="#5F5E5B" font-family="Consolas, Microsoft JhengHei">UPDATE … WHERE attempt = ? AND status = 'generating'</text>
+  </g>
+  <g id="rules-takeaway" data-pptx-bounds="72 590 1136 94" fill="#191919">
+    <rect x="72" y="600" width="1136" height="76" rx="12" fill-opacity="0.06" />
+    <text x="100" y="648" font-size="28"><tspan font-weight="bold" fill="#E8553B">代價：</tspan>當機的工作要等逾時後，才會被下一個請求回收。</text>
+  </g>
+</svg>

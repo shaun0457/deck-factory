@@ -1,0 +1,9 @@
+node_modules
+dist
+.DS_Store
+.venv/
+pnpm-debug.log*
+# ppt-master build output: keep svg_output/ and spec_lock.md, drop generated files
+pptx/projects/*/exports/
+pptx/projects/*/backup/
+pptx/projects/*/validation/

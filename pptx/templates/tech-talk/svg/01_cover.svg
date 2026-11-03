@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-Hant" data-pptx-page-role="cover" font-family="Microsoft JhengHei">
+  <rect id="cover-bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#191919"/>
+  <g id="cover-title" data-pptx-bounds="72 170 1136 270">
+    <rect x="80" y="196" width="8" height="216" fill="#E8553B"/>
+    <text x="112" y="222" font-size="18" font-weight="bold" fill="#E8553B">設計說明 · 示範內容</text>
+    <text x="112" y="312" font-size="64" font-weight="bold" fill="#FFFFFF">報表產生服務<tspan x="112" dy="86">等待的那幾分鐘，最容易出事</tspan></text>
+  </g>
+  <g id="cover-sub" data-pptx-bounds="72 470 1136 60">
+    <text x="112" y="510" font-size="24" fill="#CBD2D9">一個受理、一個背景工作、一個資料庫：兩個取捨怎麼做</text>
+  </g>
+  <g id="cover-footer" data-pptx-bounds="72 640 1136 44">
+    <text x="112" y="672" font-size="18" fill="#9B9A97">情景示範內容，數字皆為示意 · deck-studio tech-talk 範本</text>
+  </g>
+</svg>

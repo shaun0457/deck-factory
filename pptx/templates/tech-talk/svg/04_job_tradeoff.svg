@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-Hant" data-pptx-page-role="content" font-family="Microsoft JhengHei">
+  <rect id="job-bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#FFFEFC" />
+  <g id="job-title" data-pptx-bounds="72 32 1136 100" font-weight="bold">
+    <text x="72" y="70" font-size="18" fill="#E8553B">取捨一 · 工作放在哪裡</text>
+    <text x="72" y="110" font-size="40" fill="#191919">背景工作放在 API 裡，先不上 queue</text>
+  </g>
+  <g id="job-choose" data-pptx-bounds="72 150 360 420">
+    <rect x="72" y="160" width="360" height="400" rx="16" fill="#EDF3EC" />
+    <text x="104" y="204" font-size="18" font-weight="bold" fill="#448361">選擇</text>
+    <text x="104" y="252" font-size="28" font-weight="bold" fill="#191919">產生工作跑在<tspan x="104" dy="38">API process 裡</tspan></text>
+    <text x="104" y="360" font-size="24" fill="#5F5E5B">單台規模下最簡單：<tspan x="104" dy="38">等待中的請求和工作</tspan><tspan x="104" dy="38">共用記憶體，</tspan><tspan x="104" dy="38">串流直接推。</tspan></text>
+  </g>
+  <g id="job-reject" data-pptx-bounds="460 150 360 420">
+    <rect x="460" y="160" width="360" height="400" rx="16" fill="#F1EFEA" />
+    <text x="492" y="204" font-size="18" font-weight="bold" fill="#9B9A97">沒選</text>
+    <text x="492" y="252" font-size="28" font-weight="bold" fill="#191919">queue＋<tspan x="492" dy="38">獨立的 worker</tspan></text>
+    <text x="492" y="360" font-size="24" fill="#5F5E5B">多一套服務要部署、<tspan x="492" dy="38">監控和備份；</tspan><tspan x="492" dy="38">這個規模用不到。</tspan></text>
+  </g>
+  <g id="job-cost" data-pptx-bounds="848 150 360 420">
+    <rect x="848" y="160" width="360" height="400" rx="16" fill="#FAF1F5" />
+    <text x="880" y="204" font-size="18" font-weight="bold" fill="#E8553B">代價</text>
+    <text x="880" y="252" font-size="28" font-weight="bold" fill="#191919">只能單台；<tspan x="880" dy="38">同時產生有上限</tspan></text>
+    <text x="880" y="360" font-size="24" fill="#5F5E5B">上限滿了回 503；<tspan x="880" dy="38">要擴展時改成</tspan><tspan x="880" dy="38">jobs table＋</tspan><tspan x="880" dy="38">SKIP LOCKED。</tspan></text>
+  </g>
+  <g id="job-takeaway" data-pptx-bounds="72 590 1136 94" fill="#191919">
+    <rect x="72" y="600" width="1136" height="76" rx="12" fill-opacity="0.06" />
+    <text x="100" y="648" font-size="28">選簡單的那邊，但<tspan font-weight="bold" fill="#E8553B">把擴展的路先寫下來</tspan>。</text>
+  </g>
+</svg>
