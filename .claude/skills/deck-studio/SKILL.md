@@ -24,10 +24,10 @@ description: 做簡報的完整流程與設計資產：受眾與溝通契約 →
 |---|---|---|
 | 0 開場 | 時長、場合、輸出工具、交付日 | — |
 | 1 Brief | `templates/brief.md`：溝通契約、禁用詞、事實清單、待補 | **使用者確認** |
-| 2 故事線 | 選骨架（`references/storylines.md`）、頁面清單與時間 | **使用者確認** |
+| 2 故事線 | 三個方向擇一（`references/storylines.md`）→ 頁面清單與時間 | **使用者挑方向**、**使用者確認頁面清單** |
 | 3 搭建 | `scripts/new-deck.mjs` 產生 deck，填內容與講稿 | — |
 | 4 驗證 | lint-deck、check-layout、tsc/build、截圖 | 全過才回報 |
-| 5 修訂 / A/B | 另開 `<id>-b`，記錄在 `templates/revision-log.md` | 使用者選版 |
+| 5 修訂 / A/B | 方向已定、細節拿不定時另開 `<id>-b`，記錄在 `templates/revision-log.md` | 使用者選版 |
 | 6 收尾 | `templates/qa-prep.md`、彩排時間、commit（使用者要求時）、關掉 dev server | — |
 | 7 回饋資產 | 這次做出的好元件或教訓寫回本 skill（`references/asset-catalog.md`） | — |
 
@@ -70,7 +70,7 @@ SVG 寫法、檢查範圍和已知的坑見 `references/pptx.md`；範本與頁�
 
 元件目錄、使用時機和新增資產的步驟見 `references/asset-catalog.md`；設計規則（格線、字級、每行字數、配色、截圖檢查清單）見 `references/design.md`；事實與隱私規則見 `references/facts-and-privacy.md`；其他輸出工具（HTML、pptx）與 open-slide 的備用 deck、morph 做法見 `references/adapters.md`。
 
-從 0 開始時先看：`references/storylines.md`（先選論證方式，再選骨架 A–G）、`references/speaker-notes.md`（講稿怎麼寫）、`references/ppt-master.md`（ppt-master 還有哪些可以用：場合的頁面角色、圖表與表格選擇、可編輯 pptx）。
+從 0 開始時先看：`references/storylines.md`（先選論證方式和骨架 A–G，寫成三個方向讓使用者挑）、`references/speaker-notes.md`（講稿怎麼寫）、`references/ppt-master.md`（ppt-master 還有哪些可以用：場合的頁面角色、圖表與表格選擇、可編輯 pptx）。
 
 ## 回報前的最低要求
 
