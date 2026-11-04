@@ -7,8 +7,12 @@
     "dev": "open-slide dev",
     "build": "open-slide build",
     "preview": "open-slide preview",
-    "sync:skills": "open-slide sync:skills"
+    "sync:skills": "open-slide sync:skills",
+    "typecheck": "tsc --noEmit -p .",
+    "lint:decks": "node scripts/lint-decks.mjs",
+    "verify": "pnpm typecheck && pnpm lint:decks && pnpm build"
   },
+  "packageManager": "pnpm@11.18.0",
   "dependencies": {
     "@open-slide/core": "^2.0.0",
     "react": "^19.2.8",
@@ -16,6 +20,7 @@
   },
   "devDependencies": {
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.5"
+    "@types/react-dom": "^19.2.5",
+    "typescript": "5.9.3"
   }
 }

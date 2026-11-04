@@ -39,7 +39,7 @@ py -3.12 -m venv .venv                     # macOS/Linux：python3.12 -m venv .v
 
 # 4. 確認裝好了
 S=.claude/skills/deck-studio/scripts
-pnpm build                                              # open-slide 能 build
+pnpm verify                                             # 型別檢查＋每份 deck 的 lint＋build（CI 跑同一個指令）
 node $S/pptx.mjs new setup-check --template tech-talk   # 用範本建一個測試專案
 node $S/pptx.mjs build pptx/projects/setup-check_*      # 最後一行印出 pptx: <路徑>
 node $S/pptx.mjs render <上一步的 pptx 路徑> --out setup-check-shots   # 只在有 PowerPoint 的 Windows
@@ -66,8 +66,9 @@ S=.claude/skills/deck-studio/scripts
 
 # open-slide
 pnpm dev
+pnpm verify                      # commit 前跑；GitHub CI 在每個 PR 和 push 到 main 時跑同一個指令
 node $S/new-deck.mjs --project . --id <slide-id> --title "<標題>"
-node $S/lint-deck.mjs slides/<id>/index.tsx --config <lint.config.json>
+node $S/lint-deck.mjs slides/<id>/index.tsx --config <lint.config.json>   # 單一份 deck；pnpm lint:decks 會依 plan/<id>/lint.config.json 跑全部
 node $S/check-layout.mjs --base http://localhost:5173 --slide <id> --pages 1-9
 
 # pptx

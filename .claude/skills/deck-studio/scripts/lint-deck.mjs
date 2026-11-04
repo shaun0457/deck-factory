@@ -2,6 +2,11 @@
 // Static checks on an open-slide deck file (no browser needed).
 //
 //   node lint-deck.mjs <slides/<id>/index.tsx> [--config <lint.config.json>]
+//                      [--notes <name> --pages <name>]
+//
+// By default the notes are `export const notes = [...]` and the pages are
+// `export default [...]`. --notes / --pages name other exported arrays instead
+// (`export const <name> = [...]`), e.g. the backup arrays another deck re-exports.
 //
 // Checks:
 //   1. banned phrases (config "banned") anywhere in the file: slides and notes
@@ -18,7 +23,7 @@ import { splitArgs } from './lib/browser.mjs';
 const { positional, opts } = splitArgs(process.argv.slice(2));
 const file = positional[0];
 if (!file) {
-  console.error('usage: lint-deck.mjs <index.tsx> [--config lint.config.json]');
+  console.error('usage: lint-deck.mjs <index.tsx> [--config lint.config.json] [--notes <name> --pages <name>]');
   process.exit(2);
 }
 const src = readFileSync(file, 'utf8');
@@ -107,7 +112,9 @@ function stripComments(s) {
 }
 
 function arrayAfter(text, anchor) {
-  const at = text.indexOf(anchor);
+  const escaped = anchor.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const hit = new RegExp(`${escaped}(?![\\w$])`).exec(text);
+  const at = hit ? hit.index : -1;
   if (at < 0) return null;
   let from = at + anchor.length;
   // Skip a type annotation such as `: (string | undefined)[]`; the array starts after `=`.
@@ -121,14 +128,24 @@ function arrayAfter(text, anchor) {
 }
 
 // 2. Notes vs pages.
-const notes = arrayAfter(src, 'export const notes');
-const pages = arrayAfter(src, 'export default');
+const IDENT = /^[A-Za-z_$][\w$]*$/;
+for (const key of ['notes', 'pages']) {
+  if (opts[key] !== undefined && (typeof opts[key] !== 'string' || !IDENT.test(opts[key]))) {
+    console.error(`lint-deck: --${key} needs an exported array name`);
+    process.exit(2);
+  }
+}
+// The anchor ends at a word boundary so `notes` does not match `notesExtra`.
+const notesAnchor = opts.notes ? `export const ${opts.notes}` : 'export const notes';
+const pagesAnchor = opts.pages ? `export const ${opts.pages}` : 'export default';
+const notes = arrayAfter(src, notesAnchor);
+const pages = arrayAfter(src, pagesAnchor);
 const noteText = (n) => n.trim().replace(/^[`'"]/, '');
 if (!notes) {
-  console.log('notes   could not read `export const notes = [...]`');
+  console.log(`notes   could not read \`${notesAnchor} = [...]\``);
   failed = true;
 } else if (!pages) {
-  console.log('notes   could not read `export default [...]`');
+  console.log(`notes   could not read \`${pagesAnchor} [...]\``);
   failed = true;
 } else {
   const names = pages.map((p) => p.trim());
