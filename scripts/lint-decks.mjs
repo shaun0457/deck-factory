@@ -3,12 +3,12 @@
 //   node scripts/lint-decks.mjs        (any cwd; paths resolve from the repo root)
 //
 // Config for slides/<id>: plan/<id>/lint.config.json, else the same with the
-// last "-segment" removed once (agentic-ai-intro-b -> plan/agentic-ai-intro/).
+// last "-segment" removed once (talk-b -> plan/talk/).
 // No config: lint-deck still checks notes vs pages, but not banned phrases or
 // talk time; the log line says "(no config)".
 //
 // A deck that only re-exports another deck's arrays, e.g.
-//   import { backupNotes, backupPages } from '../agentic-ai-intro/index';
+//   import { backupNotes, backupPages } from '../talk/index';
 //   export const notes = backupNotes;
 //   export default backupPages;
 // is checked against those source arrays (lint-deck --notes/--pages).
@@ -83,14 +83,22 @@ function lintTarget(file, src) {
 }
 
 const slidesDir = join(ROOT, 'slides');
-const decks = existsSync(slidesDir)
-  ? readdirSync(slidesDir, { withFileTypes: true })
-      .filter((d) => d.isDirectory() && existsSync(join(slidesDir, d.name, 'index.tsx')))
-      .map((d) => d.name)
-      .sort()
-  : [];
+const entries = existsSync(slidesDir) ? readdirSync(slidesDir, { withFileTypes: true }) : [];
+// Private decks are linked in (scripts/link-private.mjs). A link whose target is
+// gone must fail, not be skipped, or verify stays green without checking it.
+const broken = entries
+  .filter((d) => d.isSymbolicLink() && !existsSync(join(slidesDir, d.name, 'index.tsx')))
+  .map((d) => d.name);
+const decks = entries
+  .filter((d) => (d.isDirectory() || d.isSymbolicLink()) && existsSync(join(slidesDir, d.name, 'index.tsx')))
+  .map((d) => d.name)
+  .sort();
 
 let failed = 0;
+for (const id of broken) {
+  console.log(`lint-decks: slides/${id} is a link without index.tsx (moved repo? rerun scripts/link-private.mjs)`);
+  failed += 1;
+}
 for (const id of decks) {
   const file = join(slidesDir, id, 'index.tsx');
   const target = lintTarget(file, readFileSync(file, 'utf8'));

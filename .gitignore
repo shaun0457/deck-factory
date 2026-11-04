@@ -7,3 +7,5 @@ pnpm-debug.log*
 pptx/projects/*/exports/
 pptx/projects/*/backup/
 pptx/projects/*/validation/
+# private decks: a separate git repo, linked into slides/ and plan/ by scripts/link-private.mjs
+/private/

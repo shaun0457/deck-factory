@@ -13,7 +13,7 @@
 
 | 工具 | 用途 | 備註 |
 |---|---|---|
-| Git、GitHub CLI（`gh`） | clone 這個 private repo | `gh auth login` 登入有權限的帳號 |
+| Git、GitHub CLI（`gh`） | clone 這個 repo | `gh auth login` 登入有權限的帳號 |
 | Node.js 22 以上、pnpm | open-slide、deck-studio 的腳本 | pnpm：`npm i -g pnpm` |
 | Python 3.12 | ppt-master | Windows 用 `py -3.12` 確認有裝 |
 | PowerPoint（Windows） | `pptx.mjs render` 輸出每頁截圖 | 只做 pptx 不截圖可以不裝 |
@@ -78,6 +78,17 @@ node $S/pptx.mjs render <file.pptx> --out <dir>      # 用 PowerPoint 輸出每�
 ```
 
 完整流程見 `.claude/skills/deck-studio/SKILL.md`。
+
+## 私人簡報
+
+這個 repo 是公開的。不能公開的簡報（面試、客戶）放在 `private/`：它是另一個私人 git repo，這裡整個忽略。`private/` 的結構和這裡一樣（`private/slides/<id>/`、`private/plan/<id>/`），用下面的指令連進來：
+
+```bash
+git clone <私人 repo> private
+node scripts/link-private.mjs   # 建 slides/<id>、plan/<id> 的 junction，並寫進 .git/info/exclude
+```
+
+連好之後 `pnpm dev`、`pnpm verify` 都看得到私人簡報，`git status` 和 GitHub 看不到。私人簡報的 commit 在 `private/` 裡做。新的私人簡報先建在 `private/slides/<id>/`，再跑一次 `link-private.mjs`。
 
 ## 目錄
 
